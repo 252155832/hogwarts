@@ -1,0 +1,21 @@
+import selenium
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+class TestDemo0:
+    def setup_method(self,method):
+        # option = Options()
+        # option.debugger_address='127.0.0.1:9222'
+        self.driver = webdriver.Chrome()
+        self.driver.implicitly_wait(5)
+    def teardown_method(self,method):
+        self.driver.quit()
+    def test_cookie(self):
+        self.driver.get('https://work.weixin.qq.com/wework_admin/frame#index')
+        cookies = [{'domain': '.work.weixin.qq.com', 'httpOnly': True, 'name': 'wwrtx.vst', 'path': '/', 'secure': False, 'value': '8VS6sLw3bI_xvcWFoWKkAPm_78Ej2M7S_l_7Jw5m88D5zpMPMjLd4IMPOgPpWeeOcEISFRe1blD3g9fKKdNTiszq3RkTdH_3gW4AjRsdeVYGttVEFE8TdwgOqIi8ccZvbCn_z9mDUYB83albpZS1YIgRen9Fzi7NDx2hor4O2jGOcyXuxDZJyHoLD9MrP9W6h9sFjWX7qFUtJnpQgMiQWWdNY_-VvEmIbVccA7nI1alaW5Zfnmrng5ZoRNPcgXwFg_qGdA8uUs9jC2PQbHuCOA'}, {'domain': '.work.weixin.qq.com', 'httpOnly': True, 'name': 'wwrtx.sid', 'path': '/', 'secure': False, 'value': '3X1SD9sqUx9vpPlaQrd82dCMwqAb3VZ6BvV0tBNL5CLWi8FGfESXkCyIPN8gLQZU'}, {'domain': '.work.weixin.qq.com', 'httpOnly': False, 'name': 'wwrtx.d2st', 'path': '/', 'secure': False, 'value': 'a2289124'}, {'domain': '.work.weixin.qq.com', 'httpOnly': False, 'name': 'wxpay.vid', 'path': '/', 'secure': False, 'value': '1688850374034923'}, {'domain': '.work.weixin.qq.com', 'httpOnly': False, 'name': 'wxpay.corpid', 'path': '/', 'secure': False, 'value': '1970325022154855'}, {'domain': '.work.weixin.qq.com', 'httpOnly': False, 'name': 'wwrtx.vid', 'path': '/', 'secure': False, 'value': '1688850374034923'}, {'domain': 'work.weixin.qq.com', 'expiry': 1598004717.945588, 'httpOnly': True, 'name': 'ww_rtkey', 'path': '/', 'secure': False, 'value': '51rabfg'}, {'domain': '.qq.com', 'expiry': 1598061947, 'httpOnly': False, 'name': '_gid', 'path': '/', 'secure': False, 'value': 'GA1.2.2061168913.1597932044'}, {'domain': '.qq.com', 'expiry': 1661047547, 'httpOnly': False, 'name': '_ga', 'path': '/', 'secure': False, 'value': 'GA1.2.1743892744.1597932044'}, {'domain': '.work.weixin.qq.com', 'expiry': 1629468037.703793, 'httpOnly': False, 'name': 'wwrtx.c_gdpr', 'path': '/', 'secure': False, 'value': '0'}, {'domain': '.qq.com', 'expiry': 2147483645.9126, 'httpOnly': False, 'name': 'ptcz', 'path': '/', 'secure': False, 'value': '3f36d4cfc1e16efbe00f57f2ea9c500f3cd6063a26b31f1778e5ce94a1c5ef38'}, {'domain': '.work.weixin.qq.com', 'httpOnly': True, 'name': 'wwrtx.ltype', 'path': '/', 'secure': False, 'value': '1'}, {'domain': '.qq.com', 'expiry': 2147385600, 'httpOnly': False, 'name': 'pgv_pvid', 'path': '/', 'secure': False, 'value': '4793898560'}, {'domain': '.work.weixin.qq.com', 'expiry': 1629468239, 'httpOnly': False, 'name': 'Hm_lvt_9364e629af24cb52acc78b43e8c9f77d', 'path': '/', 'secure': False, 'value': '1597932042'}, {'domain': '.work.weixin.qq.com', 'httpOnly': True, 'name': 'wwrtx.ref', 'path': '/', 'secure': False, 'value': 'direct'}, {'domain': '.qq.com', 'expiry': 2147483645.912502, 'httpOnly': False, 'name': 'RK', 'path': '/', 'secure': False, 'value': '7WJhDNUHYt'}, {'domain': '.work.weixin.qq.com', 'expiry': 1600567549.886621, 'httpOnly': False, 'name': 'wwrtx.i18n_lan', 'path': '/', 'secure': False, 'value': 'zh-cn'}, {'domain': '.work.weixin.qq.com', 'httpOnly': False, 'name': 'Hm_lpvt_9364e629af24cb52acc78b43e8c9f77d', 'path': '/', 'secure': False, 'value': '1597932239'}, {'domain': '.work.weixin.qq.com', 'httpOnly': True, 'name': 'wwrtx.refid', 'path': '/', 'secure': False, 'value': '375976388337841'}, {'domain': '.qq.com', 'expiry': 2147385600, 'httpOnly': False, 'name': 'pgv_pvi', 'path': '/', 'secure': False, 'value': '7430784000'}]
+        for cookie in cookies:
+            self.driver.add_cookie(cookie)
+        self.driver.get('https://work.weixin.qq.com/wework_admin/frame#index')
+        self.driver.find_element(By.CSS_SELECTOR,".index_service_cnt_itemWrap:nth-child(2)").click()
+        self.driver.find_element(By.ID,"js_upload_file_input").send_keys("D:\weixin1.xls")
+        assert "weixin1.xls" == self.driver.find_element(By.ID,"upload_file_name").text
